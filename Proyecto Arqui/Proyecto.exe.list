@@ -1,0 +1,578 @@
+00000000: B4 00                                 MOV AH,00H
+00000002: B0 03                                 MOV AL,03H
+00000004: CD 10                                 INT 10H
+                                                
+00000006: B4 02                                 MOV AH,02H
+00000008: B6 00                                 MOV DH,00H
+0000000A: B2 00                                 MOV DL,00H
+0000000C: B7 00                                 MOV BH,00H
+0000000E: CD 10                                 INT 10H
+                                                
+00000010: E8 CF 02                              CALL MENU
+00000013: E8 A6 02                              S2:CALL TECLADO
+00000016: 3C 31                                 CMP AL,31H
+00000018: 74 F9                                 JZ S2
+0000001A: E8 A3 02                              CALL LIMPIAR
+0000001D: E8 02 00                              CALL BISECCION
+00000020: CD 21                                 INT 21H
+                                                
+                                                
+                                                BISECCION:
+00000022: B4 00                                     MOV AH,00H
+00000024: B0 12                                     MOV AL,12H
+00000026: CD 10                                     INT 10H
+00000028: E8 01 00                                  CALL RECUADRO
+0000002B: C3                                        RET
+                                                
+                                                RECUADRO:
+0000002C: B9 00 00                                  MOV CX,00D
+0000002F: BA 00 00                                  MOV DX,00D
+00000032: B4 0C                                     S1:MOV AH,0CH
+00000034: B0 04                                     MOV AL,04H
+00000036: B7 00                                     MOV BH,00H
+00000038: CD 10                                     INT 10H
+0000003A: 41                                        INC CX
+0000003B: 81 F9 D0 02                               CMP CX,720D
+0000003F: 7E F1                                     JLE S1
+00000041: 42                                        INC DX
+00000042: B9 00 00                                  MOV CX,00D
+00000045: 81 FA 90 01                               CMP DX,400D
+00000049: 7E E7                                     JLE S1
+0000004B: B4 00                                     S3:MOV AH,00H
+0000004D: CD 16                                     INT 16H
+0000004F: 3C 53                                     CMP AL,53H
+00000051: 75 F8                                     JNZ S3
+00000053: E8 F5 00                                  CALL TITULO
+00000056: E8 13 00                                  CALL CAJA
+00000059: E8 2F 00                                  CALL CAJA2
+0000005C: E8 4C 00                                  CALL CAJA3
+0000005F: E8 69 00                                  CALL CAJA4
+00000062: E8 86 00                                  CALL PLANO
+00000065: E8 A3 00                                  CALL BOTONSALIR
+00000068: E8 C0 00                                  CALL BOTONSIG
+0000006B: C3                                        RET
+                                                
+                                                CAJA:
+0000006C: B9 64 00                                  MOV CX,100D
+0000006F: BA 46 00                                  MOV DX,70D
+00000072: B4 0C                                     C1:MOV AH,0CH
+00000074: B0 07                                     MOV AL,07H
+00000076: B7 00                                     MOV BH,00H
+00000078: CD 10                                     INT 10H
+0000007A: 41                                        INC CX
+0000007B: 81 F9 2C 01                               CMP CX,300D
+0000007F: 7E F1                                     JLE C1
+00000081: 42                                        INC DX
+00000082: B9 64 00                                  MOV CX,100D
+00000085: 83 FA 64                                  CMP DX,100D
+00000088: 7E E8                                     JLE C1
+0000008A: C3                                        RET
+                                                    
+                                                CAJA2:
+0000008B: B9 64 00                                  MOV CX,100D
+0000008E: BA 82 00                                  MOV DX,130D
+00000091: B4 0C                                     C2:MOV AH,0CH
+00000093: B0 07                                     MOV AL,07H
+00000095: B7 00                                     MOV BH,00H
+00000097: CD 10                                     INT 10H
+00000099: 41                                        INC CX
+0000009A: 81 F9 2C 01                               CMP CX,300D
+0000009E: 7E F1                                     JLE C2
+000000A0: 42                                        INC DX
+000000A1: B9 64 00                                  MOV CX,100D
+000000A4: 81 FA A0 00                               CMP DX,160D
+000000A8: 7E E7                                     JLE C2
+000000AA: C3                                        RET
+                                                
+                                                CAJA3:
+000000AB: B9 64 00                                  MOV CX,100D
+000000AE: BA BE 00                                  MOV DX,190D
+000000B1: B4 0C                                     C3:MOV AH,0CH
+000000B3: B0 07                                     MOV AL,07H
+000000B5: B7 00                                     MOV BH,00H
+000000B7: CD 10                                     INT 10H
+000000B9: 41                                        INC CX
+000000BA: 81 F9 2C 01                               CMP CX,300D
+000000BE: 7E F1                                     JLE C3
+000000C0: 42                                        INC DX
+000000C1: B9 64 00                                  MOV CX,100D
+000000C4: 81 FA DC 00                               CMP DX,220D
+000000C8: 7E E7                                     JLE C3
+000000CA: C3                                        RET 
+                                                    
+                                                CAJA4:
+000000CB: B9 64 00                                  MOV CX,100D
+000000CE: BA FA 00                                  MOV DX,250D
+000000D1: B4 0C                                     C4:MOV AH,0CH
+000000D3: B0 07                                     MOV AL,07H
+000000D5: B7 00                                     MOV BH,00H
+000000D7: CD 10                                     INT 10H
+000000D9: 41                                        INC CX
+000000DA: 81 F9 2C 01                               CMP CX,300D
+000000DE: 7E F1                                     JLE C4
+000000E0: 42                                        INC DX
+000000E1: B9 64 00                                  MOV CX,100D
+000000E4: 81 FA 18 01                               CMP DX,280D
+000000E8: 7E E7                                     JLE C4
+000000EA: C3                                        RET
+                                                    
+                                                PLANO:
+000000EB: B9 5E 01                                  MOV CX,350D
+000000EE: BA 32 00                                  MOV DX,50D
+000000F1: B4 0C                                     P4:MOV AH,0CH
+000000F3: B0 07                                     MOV AL,07H
+000000F5: B7 00                                     MOV BH,00H
+000000F7: CD 10                                     INT 10H
+000000F9: 41                                        INC CX
+000000FA: 81 F9 58 02                               CMP CX,600D
+000000FE: 7E F1                                     JLE P4
+00000100: 42                                        INC DX
+00000101: B9 5E 01                                  MOV CX,350D
+00000104: 81 FA 2C 01                               CMP DX,300D
+00000108: 7E E7                                     JLE P4
+0000010A: C3                                        RET
+                                                
+                                                BOTONSALIR:
+0000010B: B9 F4 01                                  MOV CX,500D
+0000010E: BA 45 01                                  MOV DX,325D
+00000111: B4 0C                                     BS:MOV AH,0CH
+00000113: B0 07                                     MOV AL,07H
+00000115: B7 00                                     MOV BH,00H
+00000117: CD 10                                     INT 10H
+00000119: 41                                        INC CX
+0000011A: 81 F9 58 02                               CMP CX,600D
+0000011E: 7E F1                                     JLE BS
+00000120: 42                                        INC DX
+00000121: B9 F4 01                                  MOV CX,500D
+00000124: 81 FA 72 01                               CMP DX,370D
+00000128: 7E E7                                     JLE BS
+0000012A: C3                                        RET
+                                                    
+                                                BOTONSIG:
+0000012B: B9 5E 01                                  MOV CX,350D
+0000012E: BA 45 01                                  MOV DX,325D
+00000131: B4 0C                                     BS1:MOV AH,0CH
+00000133: B0 07                                     MOV AL,07H
+00000135: B7 00                                     MOV BH,00H
+00000137: CD 10                                     INT 10H
+00000139: 41                                        INC CX
+0000013A: 81 F9 C2 01                               CMP CX,450D
+0000013E: 7E F1                                     JLE BS1
+00000140: 42                                        INC DX
+00000141: B9 5E 01                                  MOV CX,350D
+00000144: 81 FA 72 01                               CMP DX,370D
+00000148: 7E E7                                     JLE BS1
+0000014A: C3                                        RET
+                                                    
+                                                TITULO:
+0000014B: B4 01                                     MOV AH,01H
+0000014D: B5 00                                     MOV CH,00H
+0000014F: B1 14                                     MOV CL,14H
+00000151: CD 10                                     INT 10H
+00000153: B4 02                                     MOV AH,02H
+00000155: B7 00                                     MOV BH,00H
+00000157: B6 00                                     MOV DH,0D
+00000159: B2 00                                     MOV DL,0D
+0000015B: CD 10                                     INT 10H
+0000015D: B0 4D                                     MOV AL,'M'
+0000015F: B4 0A                                     MOV AH,0AH
+00000161: B3 8F                                     MOV BL,10001111B
+00000163: B9 01 00                                  MOV CX,1D
+00000166: CD 10                                     INT 10H
+00000168: B4 02                                     MOV AH,02H
+0000016A: B7 00                                     MOV BH,00H
+0000016C: B6 00                                     MOV DH,00D
+0000016E: B2 01                                     MOV DL,01D
+00000170: CD 10                                     INT 10H
+00000172: B0 45                                     MOV AL,'E'
+00000174: B4 0A                                     MOV AH,0AH
+00000176: B3 8F                                     MOV BL,10001111B
+00000178: B9 01 00                                  MOV CX,1D
+0000017B: CD 10                                     INT 10H
+0000017D: B4 02                                     MOV AH,02H
+0000017F: B7 00                                     MOV BH,00H
+00000181: B6 00                                     MOV DH,00D
+00000183: B2 02                                     MOV DL,02D
+00000185: CD 10                                     INT 10H
+00000187: B0 54                                     MOV AL,'T'
+00000189: B4 0A                                     MOV AH,0AH
+0000018B: B3 8F                                     MOV BL,10001111B
+0000018D: B9 01 00                                  MOV CX,1D
+00000190: CD 10                                     INT 10H
+00000192: B4 02                                     MOV AH,02H
+00000194: B7 00                                     MOV BH,00H
+00000196: B6 00                                     MOV DH,00D
+00000198: B2 03                                     MOV DL,03D
+0000019A: CD 10                                     INT 10H
+0000019C: B0 4F                                     MOV AL,'O'
+0000019E: B4 0A                                     MOV AH,0AH
+000001A0: B3 8F                                     MOV BL,10001111B
+000001A2: B9 01 00                                  MOV CX,1D
+000001A5: CD 10                                     INT 10H
+000001A7: B4 02                                     MOV AH,02H
+000001A9: B7 00                                     MOV BH,00H
+000001AB: B6 00                                     MOV DH,00D
+000001AD: B2 04                                     MOV DL,04D
+000001AF: CD 10                                     INT 10H
+000001B1: B0 44                                     MOV AL,'D'
+000001B3: B4 0A                                     MOV AH,0AH
+000001B5: B3 8F                                     MOV BL,10001111B
+000001B7: B9 01 00                                  MOV CX,1D
+000001BA: CD 10                                     INT 10H
+000001BC: B4 02                                     MOV AH,02H
+000001BE: B7 00                                     MOV BH,00H
+000001C0: B6 00                                     MOV DH,00D
+000001C2: B2 05                                     MOV DL,05D
+000001C4: CD 10                                     INT 10H
+000001C6: B0 30                                     MOV AL,'0'
+000001C8: B4 0A                                     MOV AH,0AH
+000001CA: B3 8F                                     MOV BL,10001111B
+000001CC: B9 01 00                                  MOV CX,1D
+000001CF: CD 10                                     INT 10H
+000001D1: B4 02                                     MOV AH,02H
+000001D3: B7 00                                     MOV BH,00H
+000001D5: B6 00                                     MOV DH,00D
+000001D7: B2 07                                     MOV DL,07D
+000001D9: CD 10                                     INT 10H
+000001DB: B0 44                                     MOV AL,'D'
+000001DD: B4 0A                                     MOV AH,0AH
+000001DF: B3 8F                                     MOV BL,10001111B
+000001E1: B9 01 00                                  MOV CX,1D
+000001E4: CD 10                                     INT 10H
+000001E6: B4 02                                     MOV AH,02H
+000001E8: B7 00                                     MOV BH,00H
+000001EA: B6 00                                     MOV DH,00D
+000001EC: B2 08                                     MOV DL,08D
+000001EE: CD 10                                     INT 10H
+000001F0: B0 45                                     MOV AL,'E'
+000001F2: B4 0A                                     MOV AH,0AH
+000001F4: B3 8F                                     MOV BL,10001111B
+000001F6: B9 01 00                                  MOV CX,1D
+000001F9: CD 10                                     INT 10H
+000001FB: B4 02                                     MOV AH,02H
+000001FD: B7 00                                     MOV BH,00H
+000001FF: B6 00                                     MOV DH,00D
+00000201: B2 0A                                     MOV DL,10D
+00000203: CD 10                                     INT 10H
+00000205: B0 42                                     MOV AL,'B'
+00000207: B4 0A                                     MOV AH,0AH
+00000209: B3 8F                                     MOV BL,10001111B
+0000020B: B9 01 00                                  MOV CX,1D
+0000020E: CD 10                                     INT 10H
+00000210: B4 02                                     MOV AH,02H
+00000212: B7 00                                     MOV BH,00H
+00000214: B6 00                                     MOV DH,00D
+00000216: B2 0B                                     MOV DL,11D
+00000218: CD 10                                     INT 10H
+0000021A: B0 49                                     MOV AL,'I'
+0000021C: B4 0A                                     MOV AH,0AH
+0000021E: B3 8F                                     MOV BL,10001111B
+00000220: B9 01 00                                  MOV CX,1D
+00000223: CD 10                                     INT 10H
+00000225: B4 02                                     MOV AH,02H
+00000227: B7 00                                     MOV BH,00H
+00000229: B6 00                                     MOV DH,00D
+0000022B: B2 0C                                     MOV DL,12D
+0000022D: CD 10                                     INT 10H
+0000022F: B0 53                                     MOV AL,'S'
+00000231: B4 0A                                     MOV AH,0AH
+00000233: B3 8F                                     MOV BL,10001111B
+00000235: B9 01 00                                  MOV CX,1D
+00000238: CD 10                                     INT 10H
+0000023A: B4 02                                     MOV AH,02H
+0000023C: B7 00                                     MOV BH,00H
+0000023E: B6 00                                     MOV DH,00D
+00000240: B2 0D                                     MOV DL,13D
+00000242: CD 10                                     INT 10H
+00000244: B0 45                                     MOV AL,'E'
+00000246: B4 0A                                     MOV AH,0AH
+00000248: B3 8F                                     MOV BL,10001111B
+0000024A: B9 01 00                                  MOV CX,1D
+0000024D: CD 10                                     INT 10H
+0000024F: B4 02                                     MOV AH,02H
+00000251: B7 00                                     MOV BH,00H
+00000253: B6 00                                     MOV DH,00D
+00000255: B2 0E                                     MOV DL,14D
+00000257: CD 10                                     INT 10H
+00000259: B0 43                                     MOV AL,'C'
+0000025B: B4 0A                                     MOV AH,0AH
+0000025D: B3 8F                                     MOV BL,10001111B
+0000025F: B9 02 00                                  MOV CX,2D
+00000262: CD 10                                     INT 10H
+00000264: B4 02                                     MOV AH,02H
+00000266: B7 00                                     MOV BH,00H
+00000268: B6 00                                     MOV DH,00D
+0000026A: B2 10                                     MOV DL,16D
+0000026C: CD 10                                     INT 10H
+0000026E: B0 49                                     MOV AL,'I'
+00000270: B4 0A                                     MOV AH,0AH
+00000272: B3 8F                                     MOV BL,10001111B
+00000274: B9 01 00                                  MOV CX,1D
+00000277: CD 10                                     INT 10H
+00000279: B4 02                                     MOV AH,02H
+0000027B: B7 00                                     MOV BH,00H
+0000027D: B6 00                                     MOV DH,00D
+0000027F: B2 11                                     MOV DL,17D
+00000281: CD 10                                     INT 10H
+00000283: B0 4F                                     MOV AL,'O'
+00000285: B4 0A                                     MOV AH,0AH
+00000287: B3 8F                                     MOV BL,10001111B
+00000289: B9 01 00                                  MOV CX,1D
+0000028C: CD 10                                     INT 10H
+0000028E: B4 02                                     MOV AH,02H
+00000290: B7 00                                     MOV BH,00H
+00000292: B6 00                                     MOV DH,00D
+00000294: B2 12                                     MOV DL,18D
+00000296: CD 10                                     INT 10H
+00000298: B0 4E                                     MOV AL,'N'
+0000029A: B4 0A                                     MOV AH,0AH
+0000029C: B3 8F                                     MOV BL,10001111B
+0000029E: B9 01 00                                  MOV CX,1D
+000002A1: CD 10                                     INT 10H
+000002A3: C3                                        RET
+                                                    
+                                                
+                                                AVANZAR:
+000002A4: B4 03                                     MOV AH,03H
+000002A6: B7 00                                     MOV BH,00H
+000002A8: CD 10                                     INT 10H
+000002AA: B4 02                                     MOV AH,02H
+000002AC: FE C2                                     INC DL
+000002AE: CD 10                                     INT 10H
+000002B0: C3                                        RET  
+                                                
+                                                SIGLINEA:
+000002B1: B4 02                                     MOV AH,02H
+000002B3: FE C6                                     INC DH
+000002B5: B2 00                                     MOV DL,00H
+000002B7: B7 00                                     MOV BH,00H
+000002B9: CD 10                                     INT 10H
+000002BB: C3                                        RET
+                                                
+                                                TECLADO:
+000002BC: B4 00                                     MOV AH,00H
+000002BE: CD 16                                     INT 16H
+                                                
+                                                LIMPIAR:
+000002C0: B4 02                                     MOV AH,02H
+000002C2: BA 00 00                                  MOV DX,0000H
+000002C5: CD 10                                     INT 10H
+000002C7: B8 00 06                                  MOV AX,0600H
+000002CA: B7 07                                     MOV BH,07H
+000002CC: B9 00 00                                  MOV CX,0000H
+000002CF: BA 4F 16                                  MOV DX,164FH
+000002D2: CD 10                                     INT 10H
+000002D4: C3                                        RET
+                                                
+                                                LETRA:
+000002D5: B4 09                                     MOV AH,09H
+000002D7: B3 0F                                     MOV BL,00001111B
+000002D9: B9 01 00                                  MOV CX,01
+000002DC: CD 10                                     INT 10H
+000002DE: E8 C3 FF                                  CALL AVANZAR
+000002E1: C3                                        RET
+                                                
+                                                MENU:
+000002E2: B0 42                                     MOV AL,"B"
+000002E4: E8 EE FF                                  CALL LETRA
+000002E7: B0 69                                     MOV AL,"i"
+000002E9: E8 E9 FF                                  CALL LETRA
+000002EC: B0 65                                     MOV AL,"e"
+000002EE: E8 E4 FF                                  CALL LETRA
+000002F1: B0 6E                                     MOV AL,"n"
+000002F3: E8 DF FF                                  CALL LETRA
+000002F6: B0 76                                     MOV AL,"v"
+000002F8: E8 DA FF                                  CALL LETRA
+000002FB: B0 65                                     MOV AL,"e"
+000002FD: E8 D5 FF                                  CALL LETRA
+00000300: B0 6E                                     MOV AL,"n"
+00000302: E8 D0 FF                                  CALL LETRA
+00000305: B0 69                                     MOV AL,"i"
+00000307: E8 CB FF                                  CALL LETRA
+0000030A: B0 64                                     MOV AL,"d"
+0000030C: E8 C6 FF                                  CALL LETRA
+0000030F: B0 6F                                     MOV AL,"o"
+00000311: E8 C1 FF                                  CALL LETRA
+00000314: B0 20                                     MOV AL," "
+00000316: E8 BC FF                                  CALL LETRA
+00000319: B0 61                                     MOV AL,"a"
+0000031B: E8 B7 FF                                  CALL LETRA
+0000031E: B0 6C                                     MOV AL,"l"
+00000320: E8 B2 FF                                  CALL LETRA
+00000323: B0 20                                     MOV AL," "
+00000325: E8 AD FF                                  CALL LETRA
+00000328: B0 73                                     MOV AL,"s"
+0000032A: E8 A8 FF                                  CALL LETRA
+0000032D: B0 69                                     MOV AL,"i"
+0000032F: E8 A3 FF                                  CALL LETRA
+00000332: B0 73                                     MOV AL,"s"
+00000334: E8 9E FF                                  CALL LETRA
+00000337: B0 74                                     MOV AL,"t"
+00000339: E8 99 FF                                  CALL LETRA
+0000033C: B0 65                                     MOV AL,"e"
+0000033E: E8 94 FF                                  CALL LETRA
+00000341: B0 6D                                     MOV AL,"m"
+00000343: E8 8F FF                                  CALL LETRA
+00000346: B0 61                                     MOV AL,"a"
+00000348: E8 8A FF                                  CALL LETRA
+0000034B: E8 63 FF                                  CALL SIGLINEA
+0000034E: B0 49                                     MOV AL,"I"
+00000350: E8 82 FF                                  CALL LETRA
+00000353: B0 6E                                     MOV AL,"n"
+00000355: E8 7D FF                                  CALL LETRA
+00000358: B0 67                                     MOV AL,"g"
+0000035A: E8 78 FF                                  CALL LETRA
+0000035D: B0 72                                     MOV AL,"r"
+0000035F: E8 73 FF                                  CALL LETRA
+00000362: B0 65                                     MOV AL,"e"
+00000364: E8 6E FF                                  CALL LETRA
+00000367: B0 73                                     MOV AL,"s"
+00000369: E8 69 FF                                  CALL LETRA
+0000036C: B0 65                                     MOV AL,"e"
+0000036E: E8 64 FF                                  CALL LETRA
+00000371: B0 20                                     MOV AL," "
+00000373: E8 5F FF                                  CALL LETRA
+00000376: B0 6F                                     MOV AL,"o"
+00000378: E8 5A FF                                  CALL LETRA
+0000037B: B0 70                                     MOV AL,"p"
+0000037D: E8 55 FF                                  CALL LETRA
+00000380: B0 63                                     MOV AL,"c"
+00000382: E8 50 FF                                  CALL LETRA
+00000385: B0 69                                     MOV AL,"i"
+00000387: E8 4B FF                                  CALL LETRA
+0000038A: B0 6F                                     MOV AL,"o"
+0000038C: E8 46 FF                                  CALL LETRA
+0000038F: B0 6E                                     MOV AL,"n"
+00000391: E8 41 FF                                  CALL LETRA
+00000394: B0 3A                                     MOV AL,":"
+00000396: E8 3C FF                                  CALL LETRA
+00000399: E8 15 FF                                  CALL SIGLINEA
+0000039C: B0 31                                     MOV AL,"1"
+0000039E: E8 34 FF                                  CALL LETRA
+000003A1: B0 29                                     MOV AL,")"
+000003A3: E8 2F FF                                  CALL LETRA
+000003A6: B0 42                                     MOV AL,"B"
+000003A8: E8 2A FF                                  CALL LETRA
+000003AB: B0 69                                     MOV AL,"i"
+000003AD: E8 25 FF                                  CALL LETRA
+000003B0: B0 73                                     MOV AL,"s"
+000003B2: E8 20 FF                                  CALL LETRA
+000003B5: B0 65                                     MOV AL,"e"
+000003B7: E8 1B FF                                  CALL LETRA
+000003BA: B0 63                                     MOV AL,"c"
+000003BC: E8 16 FF                                  CALL LETRA
+000003BF: B0 63                                     MOV AL,"c"
+000003C1: E8 11 FF                                  CALL LETRA
+000003C4: B0 69                                     MOV AL,"i"
+000003C6: E8 0C FF                                  CALL LETRA
+000003C9: B0 6F                                     MOV AL,"o"
+000003CB: E8 07 FF                                  CALL LETRA
+000003CE: B0 6E                                     MOV AL,"n"
+000003D0: E8 02 FF                                  CALL LETRA
+000003D3: E8 DB FE                                  CALL SIGLINEA
+000003D6: B0 32                                     MOV AL,"2"
+000003D8: E8 FA FE                                  CALL LETRA
+000003DB: B0 29                                     MOV AL,")"
+000003DD: E8 F5 FE                                  CALL LETRA
+000003E0: B0 50                                     MOV AL,"P"
+000003E2: E8 F0 FE                                  CALL LETRA
+000003E5: B0 75                                     MOV AL,"u"
+000003E7: E8 EB FE                                  CALL LETRA
+000003EA: B0 6E                                     MOV AL,"n"
+000003EC: E8 E6 FE                                  CALL LETRA
+000003EF: B0 74                                     MOV AL,"t"
+000003F1: E8 E1 FE                                  CALL LETRA
+000003F4: B0 6F                                     MOV AL,"o"
+000003F6: E8 DC FE                                  CALL LETRA
+000003F9: B0 20                                     MOV AL," "
+000003FB: E8 D7 FE                                  CALL LETRA
+000003FE: B0 66                                     MOV AL,"f"
+00000400: E8 D2 FE                                  CALL LETRA
+00000403: B0 69                                     MOV AL,"i"
+00000405: E8 CD FE                                  CALL LETRA
+00000408: B0 6A                                     MOV AL,"j"
+0000040A: E8 C8 FE                                  CALL LETRA
+0000040D: B0 6F                                     MOV AL,"o"
+0000040F: E8 C3 FE                                  CALL LETRA
+00000412: E8 9C FE                                  CALL SIGLINEA
+00000415: B0 33                                     MOV AL,"3"
+00000417: E8 BB FE                                  CALL LETRA
+0000041A: B0 29                                     MOV AL,")"
+0000041C: E8 B6 FE                                  CALL LETRA
+0000041F: B0 4E                                     MOV AL,"N"
+00000421: E8 B1 FE                                  CALL LETRA
+00000424: B0 65                                     MOV AL,"e"
+00000426: E8 AC FE                                  CALL LETRA
+00000429: B0 77                                     MOV AL,"w"
+0000042B: E8 A7 FE                                  CALL LETRA
+0000042E: B0 74                                     MOV AL,"t"
+00000430: E8 A2 FE                                  CALL LETRA
+00000433: B0 6F                                     MOV AL,"o"
+00000435: E8 9D FE                                  CALL LETRA
+00000438: B0 6E                                     MOV AL,"n"
+0000043A: E8 98 FE                                  CALL LETRA
+0000043D: B0 20                                     MOV AL," "
+0000043F: E8 93 FE                                  CALL LETRA
+00000442: B0 52                                     MOV AL,"R"
+00000444: E8 8E FE                                  CALL LETRA
+00000447: B0 61                                     MOV AL,"a"
+00000449: E8 89 FE                                  CALL LETRA
+0000044C: B0 70                                     MOV AL,"p"
+0000044E: E8 84 FE                                  CALL LETRA
+00000451: B0 68                                     MOV AL,"h"
+00000453: E8 7F FE                                  CALL LETRA
+00000456: B0 73                                     MOV AL,"s"
+00000458: E8 7A FE                                  CALL LETRA
+0000045B: B0 6F                                     MOV AL,"o"
+0000045D: E8 75 FE                                  CALL LETRA
+00000460: B0 6E                                     MOV AL,"n"
+00000462: E8 70 FE                                  CALL LETRA
+00000465: E8 49 FE                                  CALL SIGLINEA
+00000468: B0 34                                     MOV AL,"4"
+0000046A: E8 68 FE                                  CALL LETRA
+0000046D: B0 29                                     MOV AL,")"
+0000046F: E8 63 FE                                  CALL LETRA
+00000472: B0 53                                     MOV AL,"S"
+00000474: E8 5E FE                                  CALL LETRA
+00000477: B0 74                                     MOV AL,"t"
+00000479: E8 59 FE                                  CALL LETRA
+0000047C: B0 65                                     MOV AL,"e"
+0000047E: E8 54 FE                                  CALL LETRA
+00000481: B0 66                                     MOV AL,"f"
+00000483: E8 4F FE                                  CALL LETRA
+00000486: B0 66                                     MOV AL,"f"
+00000488: E8 4A FE                                  CALL LETRA
+0000048B: B0 65                                     MOV AL,"e"
+0000048D: E8 45 FE                                  CALL LETRA
+00000490: B0 6E                                     MOV AL,"n"
+00000492: E8 40 FE                                  CALL LETRA
+00000495: B0 73                                     MOV AL,"s"
+00000497: E8 3B FE                                  CALL LETRA
+0000049A: B0 65                                     MOV AL,"e"
+0000049C: E8 36 FE                                  CALL LETRA
+0000049F: B0 6E                                     MOV AL,"n"
+000004A1: E8 31 FE                                  CALL LETRA
+000004A4: E8 0A FE                                  CALL SIGLINEA
+000004A7: B0 4F                                     MOV AL,"O"
+000004A9: E8 29 FE                                  CALL LETRA
+000004AC: B0 70                                     MOV AL,"p"
+000004AE: E8 24 FE                                  CALL LETRA
+000004B1: B0 63                                     MOV AL,"c"
+000004B3: E8 1F FE                                  CALL LETRA
+000004B6: B0 69                                     MOV AL,"i"
+000004B8: E8 1A FE                                  CALL LETRA
+000004BB: B0 6F                                     MOV AL,"o"
+000004BD: E8 15 FE                                  CALL LETRA
+000004C0: B0 6E                                     MOV AL,"n"
+000004C2: E8 10 FE                                  CALL LETRA
+000004C5: B0 3A                                     MOV AL,":"
+000004C7: E8 0B FE                                  CALL LETRA
+000004CA: B0 20                                     MOV AL," "
+000004CC: E8 06 FE                                  CALL LETRA
+000004CF: C3                                        RET
+                                                
+                                                
+                                                
+                                                ; [SOURCE]: C:\Documents and Settings\Jonathan\Mis documentos\Proyecto.asm
+                                                
+                                                

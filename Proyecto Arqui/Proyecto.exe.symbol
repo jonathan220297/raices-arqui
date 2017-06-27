@@ -1,0 +1,34 @@
+< THE SYMBOL TABLE >  Proyecto.exe  --  emu8086 IDE version: 4.08 
+===================================================================================================
+Name                     	Offset    	Size      	Type      	Segment   
+===================================================================================================
+S2                       	00013     	-1        	LABEL     	(GLOBAL)  
+_1                       	00000     	-1        	(UNDEFINED)	(UNDEFINED)
+_2                       	00000     	-1        	(UNDEFINED)	(UNDEFINED)
+S1                       	00032     	-1        	LABEL     	(GLOBAL)  
+S3                       	0004B     	-1        	LABEL     	(GLOBAL)  
+_5                       	00000     	-1        	(UNDEFINED)	(UNDEFINED)
+C1                       	00072     	-1        	LABEL     	(GLOBAL)  
+_7                       	00000     	-1        	(UNDEFINED)	(UNDEFINED)
+C2                       	00091     	-1        	LABEL     	(GLOBAL)  
+_9                       	00000     	-1        	(UNDEFINED)	(UNDEFINED)
+C3                       	000B1     	-1        	LABEL     	(GLOBAL)  
+_11                      	00000     	-1        	(UNDEFINED)	(UNDEFINED)
+C4                       	000D1     	-1        	LABEL     	(GLOBAL)  
+_13                      	00000     	-1        	(UNDEFINED)	(UNDEFINED)
+P4                       	000F1     	-1        	LABEL     	(GLOBAL)  
+_15                      	00000     	-1        	(UNDEFINED)	(UNDEFINED)
+BS                       	00111     	-1        	LABEL     	(GLOBAL)  
+_17                      	00000     	-1        	(UNDEFINED)	(UNDEFINED)
+BS1                      	00131     	-1        	LABEL     	(GLOBAL)  
+_19                      	00000     	-1        	(UNDEFINED)	(UNDEFINED)
+_20                      	00000     	-1        	(UNDEFINED)	(UNDEFINED)
+_21                      	00000     	-1        	(UNDEFINED)	(UNDEFINED)
+_22                      	00000     	-1        	(UNDEFINED)	(UNDEFINED)
+_23                      	00000     	-1        	(UNDEFINED)	(UNDEFINED)
+_24                      	00000     	-1        	(UNDEFINED)	(UNDEFINED)
+_25                      	00000     	-1        	(UNDEFINED)	(UNDEFINED)
+===================================================================================================
+[ 27/06/2017  --  1:33:18 ] 
+< END >
+ 
