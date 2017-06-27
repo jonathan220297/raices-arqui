@@ -50,6 +50,7 @@ RECUADRO:
     CALL PLANO
     CALL BOTONSALIR
     CALL BOTONSIG
+    CALL TIFX
     RET
 
 CAJA:
@@ -166,8 +167,8 @@ BOTONSIG:
     
 TITULO:
     MOV AH,01H
-    MOV CH,00H
-    MOV CL,14H
+    MOV CH,16H
+    MOV CL,0EH
     INT 10H
     MOV AH,02H
     MOV BH,00H
@@ -325,6 +326,33 @@ TITULO:
     MOV DL,18D
     INT 10H
     MOV AL,'N'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    RET
+    
+TIFX:
+    MOV AH,01H
+    MOV CH,00H
+    MOV CL,0EH
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,5D
+    MOV DL,8D
+    INT 10H
+    MOV AL,'F'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,5D
+    MOV DL,9D
+    INT 10H
+    MOV AL,'x'
     MOV AH,0AH
     MOV BL,10001111B
     MOV CX,1D
