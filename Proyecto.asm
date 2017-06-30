@@ -1,8 +1,12 @@
+;Inicio de programa
 CALL BISECCION
 CALL INIMOUSE
+MAIN:CALL APUNTADOR
 CALL COMPARACIONES
+JMP MAIN
 
-
+;Rutina creacion de 
+;interfaz de metodo de biseccion
 BISECCION:
     MOV AH,00H
     MOV AL,12H
@@ -10,6 +14,7 @@ BISECCION:
     CALL RECUADRO
     RET
 
+;Se dibuja la base de la pantalla
 RECUADRO:
     MOV CX,00D
     MOV DX,00D
@@ -29,6 +34,7 @@ RECUADRO:
     CALL CAJA2
     CALL CAJA3
     CALL CAJA4
+    CALL CAJA5
     CALL PLANO
     CALL LINEAVP
     CALL LINEAHP
@@ -41,20 +47,28 @@ RECUADRO:
     CALL TIA
     CALL TIB
     CALL TIERROR
+    CALL TIRAIZ
     CALL TICALCULAR
     CALL TISALIR
     CALL TIBOTONBISEC
     CALL TIBOTONNEW
     CALL TIBOTONPU
-    CALL INIMOUSE
-    CALL COMPARACIONES
+    CALL FUNCIONFX
+    CALL LIMITEA
+    CALL LIMITEB
+    ;CALL GRAFICOBI
     RET
 
 INIMOUSE:
     MOV AX,00H
     INT 33H
     MOV AX,01H
-    INT 33H            
+    INT 33H
+    
+APUNTADOR:
+    MOV AX,03H
+    INT 33H
+    RET            
     
 COMPARACIONES:
     MOV AX,05H
@@ -82,7 +96,7 @@ BTNSALIRDER:CMP CX,500D
     JMP COMPARACIONES
     
 BTNSIGARRIBA:CMP CX,450D
-    JB FIN
+    JB GRAFICOBI
     JMP COMPARACIONES
     
 BTNSALIRARRIBA:CMP CX,600D
@@ -185,6 +199,22 @@ CAJA4:
     MOV CX,160D
     CMP DX,280D
     JLE C4
+    RET
+    
+CAJA5:
+    MOV CX,80D
+    MOV DX,330D
+    C5:MOV AH,0CH
+    MOV AL,07H
+    MOV BH,00H
+    INT 10H
+    INC CX
+    CMP CX,230D
+    JLE C5
+    INC DX
+    MOV CX,80D
+    CMP DX,360D
+    JLE C5
     RET
     
 PLANO:
@@ -426,6 +456,415 @@ TITULO:
     INT 10H
     RET
     
+TITULONEW:
+    MOV AH,01H
+    MOV CH,00H
+    MOV CL,0EH
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,0D
+    INT 10H
+    MOV AL,'M'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,1D
+    INT 10H
+    MOV AL,'E'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,2D
+    INT 10H
+    MOV AL,'T'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,3D
+    INT 10H
+    MOV AL,'O'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H  
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,4D
+    INT 10H
+    MOV AL,'D'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H  
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,5D
+    INT 10H
+    MOV AL,'O'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,7D
+    INT 10H
+    MOV AL,'D'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H 
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,8D
+    INT 10H
+    MOV AL,'E'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H 
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,10D
+    INT 10H
+    MOV AL,'N'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H 
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,11D
+    INT 10H
+    MOV AL,'E'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H 
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,12D
+    INT 10H
+    MOV AL,'W'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,13D
+    INT 10H
+    MOV AL,'T'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H 
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,14D
+    INT 10H
+    MOV AL,'O'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H 
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,15D
+    INT 10H
+    MOV AL,'N'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,17D
+    INT 10H
+    MOV AL,'R'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H 
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,18D
+    INT 10H
+    MOV AL,'A'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H 
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,19D
+    INT 10H
+    MOV AL,'P'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H  
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,20D
+    INT 10H
+    MOV AL,'H'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,21D
+    INT 10H
+    MOV AL,'S'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H  
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,22D
+    INT 10H
+    MOV AL,'O'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H 
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,23D
+    INT 10H
+    MOV AL,'N'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    RET  
+    
+TITULOPF:
+    MOV AH,01H
+    MOV CH,00H
+    MOV CL,0EH
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,0D
+    MOV DL,0D
+    INT 10H
+    MOV AL,'M'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,01D
+    INT 10H
+    MOV AL,'E'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,02D
+    INT 10H
+    MOV AL,'T'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,03D
+    INT 10H
+    MOV AL,'O'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,04D
+    INT 10H
+    MOV AL,'D'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,05D
+    INT 10H
+    MOV AL,'0'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,07D
+    INT 10H
+    MOV AL,'D'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,08D
+    INT 10H
+    MOV AL,'E'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,10D
+    INT 10H
+    MOV AL,'P'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,11D
+    INT 10H
+    MOV AL,'U'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,12D
+    INT 10H
+    MOV AL,'N'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,13D
+    INT 10H
+    MOV AL,'T'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,14D
+    INT 10H
+    MOV AL,'O'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,15D
+    INT 10H
+    MOV AL,'-'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,16D
+    INT 10H  
+    MOV AL,'F'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,17D
+    INT 10H    
+    MOV AL,'I'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,18D
+    INT 10H
+    MOV AL,'J'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,19D
+    INT 10H
+    MOV AL,'O'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,00D
+    MOV DL,20D
+    INT 10H
+    RET
+    
 TIFX:
     MOV AH,01H
     MOV CH,00H
@@ -517,6 +956,175 @@ TIB:
     INT 10H
     RET
     
+TIRAIZ:
+    MOV AH,01H
+    MOV CH,00H
+    MOV CL,0EH
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,21D
+    MOV DL,3D
+    INT 10H
+    MOV AL,'R'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,21D
+    MOV DL,4D
+    INT 10H
+    MOV AL,'A'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,21D
+    MOV DL,5D
+    INT 10H
+    MOV AL,'I'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,21D
+    MOV DL,6D
+    INT 10H
+    MOV AL,'Z'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,21D
+    MOV DL,7D
+    INT 10H
+    MOV AL,':'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    RET    
+    
+
+TITDERI:
+    MOV AH,01H
+    MOV CH,00H
+    MOV CL,0EH
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,9D
+    MOV DL,17D
+    INT 10H
+    MOV AL,'f'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,9D
+    MOV DL,18D
+    INT 10H
+    MOV AL,'x'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H 
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,9D
+    MOV DL,19D
+    INT 10H
+    MOV AL,':'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    RET
+    
+TITGX:
+    MOV AH,01H
+    MOV CH,00H
+    MOV CL,0EH
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,9D
+    MOV DL,17D
+    INT 10H
+    MOV AL,'G'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,9D
+    MOV DL,18D
+    INT 10H
+    MOV AL,'x'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H 
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,9D
+    MOV DL,19D
+    INT 10H
+    MOV AL,':'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    RET
+
+TITP:
+    MOV AH,01H
+    MOV CH,00H
+    MOV CL,0EH
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,12D
+    MOV DL,17D
+    INT 10H
+    MOV AL,'P'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,12D
+    MOV DL,18D
+    INT 10H
+    MOV AL,'0'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H 
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,9D
+    MOV DL,19D
+    INT 10H
+    MOV AL,':'
+    MOV AH,0AH
+    MOV BL,10001111B
+    MOV CX,1D
+    INT 10H
+    RET
+    
 TIERROR:
     MOV AH,01H
     MOV CH,00H
@@ -525,29 +1133,9 @@ TIERROR:
     MOV AH,02H
     MOV BH,00H
     MOV DH,16D
-    MOV DL,15D
-    INT 10H
-    MOV AL,'E'
-    MOV AH,0AH
-    MOV BL,10001111B
-    MOV CX,1D
-    INT 10H
-    MOV AH,02H
-    MOV BH,00H
-    MOV DH,16D
-    MOV DL,16D
-    INT 10H
-    MOV AL,'R'
-    MOV AH,0AH
-    MOV BL,10001111B
-    MOV CX,1D
-    INT 10H
-    MOV AH,02H
-    MOV BH,00H
-    MOV DH,16D
     MOV DL,17D
     INT 10H
-    MOV AL,'R'
+    MOV AL,'E'
     MOV AH,0AH
     MOV BL,10001111B
     MOV CX,1D
@@ -1015,7 +1603,99 @@ TIBOTONPU:
     MOV BL,10000111B
     MOV CX,1D
     INT 10H
-    RET    
+    RET
+    
+FUNCIONFX:
+    MOV AH,01H
+    MOV CH,00H
+    MOV CL,0EH
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,5D
+    MOV DL,25D
+    INT 10H
+    MOV AL,'x'
+    MOV AH,0AH
+    MOV BL,10000111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,5D
+    MOV DL,26D
+    INT 10H
+    MOV AL,094D
+    MOV AH,0AH
+    MOV BL,10000111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,5D
+    MOV DL,27D
+    INT 10H
+    MOV AL,'2'
+    MOV AH,0AH
+    MOV BL,10000111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,5D
+    MOV DL,28D
+    INT 10H
+    MOV AL,'-'
+    MOV AH,0AH
+    MOV BL,10000111B
+    MOV CX,1D
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,5D
+    MOV DL,29D
+    INT 10H
+    MOV AL,'1'
+    MOV AH,0AH
+    MOV BL,10000111B
+    MOV CX,1D
+    INT 10H
+    RET
+    
+LIMITEA:
+    MOV AH,01H
+    MOV CH,00H
+    MOV CL,0EH
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,9D
+    MOV DL,29D
+    INT 10H
+    MOV AL,'0'
+    MOV AH,0AH
+    MOV BL,10000111B
+    MOV CX,1D
+    INT 10H
+    RET
+    
+LIMITEB:
+    MOV AH,01H
+    MOV CH,00H
+    MOV CL,0EH
+    INT 10H
+    MOV AH,02H
+    MOV BH,00H
+    MOV DH,12D
+    MOV DL,29D
+    INT 10H
+    MOV AL,'2'
+    MOV AH,0AH
+    MOV BL,10000111B
+    MOV CX,1D
+    INT 10H
+    RET
+       
 
 AVANZAR:
     MOV AH,03H
@@ -1024,7 +1704,160 @@ AVANZAR:
     MOV AH,02H
     INC DL
     INT 10H
-    RET  
+    RET
+    
+GRAFICOBI:
+    MOV CX,475D
+    MOV DX,275D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,480D
+    MOV DX,274D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,485D
+    MOV DX,273D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,490D
+    MOV DX,271D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,495D
+    MOV DX,270D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,500D
+    MOV DX,268D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,505D
+    MOV DX,265D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,510D
+    MOV DX,261D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,515D
+    MOV DX,258D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,520D
+    MOV DX,253D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,525D
+    MOV DX,248D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,530D
+    MOV DX,243D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,535D
+    MOV DX,239D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,540D
+    MOV DX,233D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,545D
+    MOV DX,226D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,550D
+    MOV DX,219D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,555D
+    MOV DX,211D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,560D
+    MOV DX,203D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,565D
+    MOV DX,194D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,570D
+    MOV DX,184D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,575D
+    MOV DX,175D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,576D
+    MOV DX,175D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,574D
+    MOV DX,175D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,575D
+    MOV DX,174D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    MOV CX,575D
+    MOV DX,276D
+    MOV AH,0CH
+    MOV AL,04H
+    MOV BH,00H
+    INT 10H
+    RET        
 
 SIGLINEA:
     MOV AH,02H
@@ -1056,4 +1889,3 @@ LETRA:
     INT 10H
     CALL AVANZAR
     RET
-    
